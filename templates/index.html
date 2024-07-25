@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Art Web</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/home" class="nav-button">Home
+            <div class="tooltip">Home Page</div>
+        </a>
+        <a href="/aboutus" class="nav-button">About Us
+            <div class="tooltip">Learn more about us</div>
+        </a>
+        <a href="/aboutascii" class="nav-button">About ASCII Art
+            <div class="tooltip">What is ASCII Art?</div>
+        </a>
+      <!--  <a href="/login" class="nav-button">Log In
+            <div class="tooltip">Access your account</div>
+        </a>-->
+    </div>
+
+    <div class="container">
+        <h1>ASCII Art Web</h1>
+        <div class="marquee-container">
+            <marquee behavior="scroll" direction="left" scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();">
+                Welcome to <b>ASCII Art Web</b>; a web app designed to output graphical art corresponding to user input.
+            </marquee>
+        </div>
+
+        <div class="columns">
+            <div class="column">
+                <form id="ascii-form" action="/ascii-art" method="POST">
+                    <fieldset id="banners">
+                        <legend>Choose a Banner</legend>
+                        <div class="radio-container">
+                            <input name="banner" type="radio" value="standard" id="standard" aria-labelledby="standard-label" checked />
+                            <label for="standard" id="standard-label">&nbsp;&nbsp;&nbsp;&nbsp;Standard
+                                <div class="tooltip">
+                                    <img src="../static/img/standard-banner.png" alt="Standard Banner">
+                                </div>
+                            </label>
+                        </div>
+                        <div class="radio-container">
+                            <input name="banner" type="radio" value="shadow" id="shadow" aria-labelledby="shadow-label" />
+                            <label for="shadow" id="shadow-label">&nbsp;&nbsp;&nbsp;&nbsp;Shadow
+                                <div class="tooltip">
+                                    <img src="../static/img/shadow-banner.png" alt="Shadow Banner">
+                                </div>
+                            </label>
+                        </div>
+                        <div class="radio-container">
+                            <input name="banner" type="radio" value="thinkertoy" id="thinkertoy" aria-labelledby="thinkertoy-label" />
+                            <label for="thinkertoy" id="thinkertoy-label">&nbsp;&nbsp;&nbsp;&nbsp;Thinkertoy
+                                <div class="tooltip">
+                                    <img src="../static/img/thinkertoy-banner.png" alt="Thinkertoy Banner">
+                                </div>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <label for="input">Input text</label>
+                    <textarea id="input" name="input" aria-labelledby="input-label"></textarea>
+                    <div class="submit-container">
+                        <input type="submit" value="Produce Art" aria-labelledby="submit-label"/>
+                    </div>
+                </form>
+            </div>
+            <div class="column">
+                <div id="art-display" aria-live="polite"></div>
+            </div>
+        </div>
+
+        <div class="link">
+            <p><a href="/aboutus">About Us</a></p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Get the current URL path
+            var path = window.location.pathname;
+            
+            // Remove 'active' class from all nav buttons
+            $('.nav-button').removeClass('active');
+            
+            // Add 'active' class to the current page's nav button
+            $('.nav-button[href="' + path + '"]').addClass('active');
+        });
+
+        // JavaScript for form submission
+        $(document).ready(function() {
+            $('#ascii-form').submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var formData = $(this).serialize(); // Serialize form data
+                var $submitBtn = $(this).find('input[type="submit"]');
+                var $artDisplay = $('#art-display');
+
+                $submitBtn.prop('disabled', true).val('Loading...'); // Disable submit button and show loading text
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/ascii-art',
+                    data: formData,
+                    success: function(response) {
+                        $artDisplay.html(response); // Update result container with response
+                        $submitBtn.prop('disabled', false).val('Produce Art'); // Re-enable submit button and restore text
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMsg = "An error occurred: " + xhr.status + " " + xhr.statusText;
+                        $artDisplay.html("<p style='color: red;'>" + errorMsg + "</p>"); // Display error message
+                        $submitBtn.prop('disabled', false).val('Produce Art'); // Re-enable submit button and restore text
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
