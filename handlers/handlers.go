@@ -27,18 +27,37 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet {
 			serveTemplate(w, "templates/aboutus.html")
 		}
-	case "/aboutascii", "/ascii":
-
+	case "/aboutascii", "/ascii", "/ABOUTASCII", "/About ascii", "/about ascii", "/ABOUT ASCII":
+		if r.URL.Path == "/ABOUTASCII" || r.URL.Path == "/About ascii" || r.URL.Path == "about ascii" || r.URL.Path == "/ABOUT ASCII" {
+			http.Redirect(w, r, "/aboutascii", http.StatusMovedPermanently)
+		}
 		if r.Method == http.MethodGet {
+			// http.NotFound(w, r)
 			serveTemplate(w, "templates/aboutascii.html")
 		}
-	// case "/login", "/Login":
-	// 	if r.Method == http.MethodGet {
-	// 		serveTemplate(w, "templates/login.html")
-	// 	}
+	case "/404":
+
+		if r.Method == http.MethodGet {
+			serveTemplate(w, "templates/404.html")
+		}
+	case "/400", "/400.html":
+
+		if r.Method == http.MethodGet {
+			serveTemplate(w, "templates/400.html")
+			return
+		}
+	case "/500", "500.html":
+
+		if r.Method == http.MethodGet {
+			serveTemplate(w, "templates/500.html")
+			return
+		}
+
 	default:
 		if r.Method == http.MethodGet {
-			http.NotFound(w, r)
+			tmpl := template.Must(template.ParseFiles("templates/404.html"))
+			tmpl.Execute(w, "404: Page not Found!")
+
 		}
 	}
 }
@@ -81,7 +100,12 @@ func HandleASCIIArt(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl := template.Must(template.ParseFiles("templates/result.html"))
+	tmpl, eE := template.ParseFiles("templates/result.html")
+	if eE != nil {
+		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+		log.Println("500 Internal Server Error")
+		return
+	}
 	ascii := asciiart.Art(input, asciiart.BannerArt(bannerFilePath))
 	e := tmpl.Execute(w, ascii.String())
 	if e != nil {
@@ -98,7 +122,12 @@ func serveTemplate(w http.ResponseWriter, filename string) {
 		http.Error(w, "404 Page not Found", http.StatusNotFound)
 		return
 	}
-	tmpl := template.Must(template.ParseFiles(filename))
+	tmpl, ee := template.ParseFiles(filename)
+	if ee != nil {
+		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+		log.Println("500 Internal Server Error")
+		return
+	}
 	errr := tmpl.Execute(w, nil)
 	if errr != nil {
 		log.Println("500 Internal Server Error")

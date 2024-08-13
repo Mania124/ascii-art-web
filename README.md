@@ -1,18 +1,23 @@
-# ASCII ART WEB
+# ASCII ART WEB STYLIZE
 
 ## Description
-This is a simple web-based application developed using Go and HTML. It takes input text from the user then converts it to the appropriate graphical representation using the chosen ascii art banner file (or font). The user interacts with it through a graphical interface.
+This is a simple web-based application developed using Go, HTML, CSS and a little Javascript. It takes input text from the user then converts it to the appropriate graphical representation using the chosen ascii art banner file (or font). The user interacts with it through a graphical interface.
 
 ## Usage
 1. **Clone Repository**: Clone this repository to your local machine.
-2. **Install go**: Ensure you have Go installed on your machine.
+   ```bash
+   $ git clone https://learn.zone01kisumu.ke/git/hshikuku/ascii-art-web-stylize.git
+   ```
+2. **Install go**: Ensure you have Go installed on your machine.(Go to official Go website and follow instruction(based on your OS))
 3. **Run Program**: To get the server up and running, navigate to the directory where you've cloned the repo then use the following command:
     ```bash
-    go run . 
+    $ cd /ascii-art-web-stylize
+    $ go run . 
     ```
-4.  **Launch GUI**: Open your web browser and on the address bar type this:
-    ```bash
-    http:localhost:8080 
+    This will automatically open your browser and display the GUI.
+4.  **Launch GUI**: If your browser doesn't open automatically after executing the command above, open your web browser and on the address bar type this:
+    ```
+    http://localhost:8080 
     ```
 If the GUI doesn't open check your firewall settings and grant access to the program.
 
@@ -77,6 +82,9 @@ This contains various html templates used by the GUI.
 -  **result.html**: This is where the output is displayed.
 -  **aboutus.html**:  This page contains a the name of the authors and thier github links.
 -  **aboutascii.html**:  This page contains information about the concept of ascii art.
+-  **400.html**: Displays http status code 400
+-  **404.html**: Displays http status code 404
+-  **500.html**: Displays https status code 500
 
 6. **testCases**
   Contains the expected output used in TestHandleASCIIArt

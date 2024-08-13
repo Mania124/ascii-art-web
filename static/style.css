@@ -1,52 +1,195 @@
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-image: url("/static/img/section-1-bg.jpg");
-    background-size: cover;
-    background-position: center;
-    color: #333;
+    font-size: 18px; /* Increased base font size */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: rgb(106, 143, 72);;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 15px; /* Adjusted padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.navbar a, .navbar button {
+    color: #fff;
+    text-decoration: none;
+    padding: 12px;
+    font-size: 20px; /* Increased font size */
+    position: relative;
+}
+
+.navbar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-button {
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+}
+
+.nav-button.active {
+    font-weight: bold;
+    background-color: #555;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px; /* Adjusted padding */
+    color: #000;
+    font-size: 1em; /* Adjusted font size */
+    z-index: 1000;
+    border-radius: 2px;
+    top: 100%; /* Position the tooltip below the item */
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    margin-top: 5px; /* Space between the item and the tooltip */
+}
+
+.nav-button:hover .tooltip, #mode-toggle:hover .tooltip {
+    display: block;
 }
 
 .container {
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px; /* Added padding */
+    font-size: 1.1em; /* Adjusted font size */
 }
 
-h1,
-p {
-    text-align: center;
-    color: #333;
+.marquee-container {
+    margin: 10px 0;
 }
 
 .columns {
+    display:table-column;
+    justify-content: space-between;
+}
+
+.column {
+    width: 100%;
+    min-height: 50px;
+}
+
+#art-display {
+    border: 1px solid #ddd;
+    padding: 15px; /* Adjusted padding */
+    background-color: #f4f4f4;
+    min-height: 200px;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .navbar {
+    background-color: #1f1f1f;
+}
+
+#navbar-menu {
+    display: flex;
+}
+
+#navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    #navbar-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #333;
+        width: 100%;
+    }
+
+    #navbar-menu.show {
+        display: flex;
+    }
+
+    #navbar-toggle {
+        display: block;
+    }
+    .columns{
+        display: table-column;
+    }
+    input[type="submit"] {
+        font-size: 20px;
+    }
+}
+
+/* Container styling */
+.container {
+    padding: 20px;
+}
+
+/* Marquee styling */
+.marquee-container {
+    margin-bottom: 20px;
+}
+
+marquee {
+    font-size: 1.2em; /* Increased font size */
+}
+
+/* Form styling */
+form {
     display: flex;
     flex-direction: column;
 }
 
-.column {
-    padding: 10px;
-    margin: 5px 0;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
-    height: auto;
+fieldset {
+    border: 2px solid #ddd;
+    padding: 15px; /* Adjusted padding */
+    margin: 0;
+    border-radius: 8px;
+    font-size: 1.1em; /* Increased font size */
 }
 
-#art-display {
-    
-    height: 300px;
-    background: linear-gradient(to bottom, #33ccff 0%, #66ffcc 100%);
-    padding: 2px;
-    border: 1px solid #ccc;
-    min-height: 200px;
+legend {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.2em; /* Increased font size */
 }
 
-textarea {
+textarea.out {
+    background-color: rgb(106, 143, 72);
     width: 100%;
-    height: auto;
-    margin-bottom: 2px;
+    height: 100px;
+    resize: auto;
+    font-family: monospace;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 1.1em; /* Increased font size */
 }
 
 .submit-container {
@@ -57,184 +200,99 @@ textarea {
 
 input[type="submit"] {
     width: 30%;
-    padding: 10px;
+    padding: 12px; /* Adjusted padding */
     background-color: #333;
     color: #fff;
     border: none;
     border-radius: 50px;
     cursor: pointer;
+    font-size: 1.1em; /* Increased font size */
 }
 
 input[type="submit"]:hover {
     background-color: #555;
 }
 
-.link {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.link a {
-    color: #333;
-    text-decoration: none;
-}
-
-#banners {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
-    width: auto;
-}
-
+/* Radio button styling */
 .radio-container {
     display: flex;
     align-items: center;
-    position: relative;
+    margin-bottom: 10px;
+    justify-content: flex-start;
 }
 
 .radio-container input[type="radio"] {
-    display: none;
+    margin-right: 10px; /* Space between the radio button and the label */
 }
 
 .radio-container label {
-    position: static;
-    padding-left: 40px;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    user-select: none;
-    padding: 10px 20px;
-    border: 2px solid #333;
-    border-radius: 5px;
-    background-color: #fff;
-    transition: background-color 0.3s, transform 0.3s;
-    width: auto;
-    text-align: center;
+    position: relative;
 }
 
-.radio-container input[type="radio"]:checked + label {
-    background-color: #f0f0f0;
-}
-
-.radio-container label:hover {
-    transform: scale(1.1);
-}
-#standard-label, #shadow-label, #thinkertoy-label {
-    width: auto;
-}
-.radio-container label::before {
-    content: '';
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    border: 2px solid #333;
-    border-radius: 50%;
-    background-color: #fff;
-}
-
-.radio-container input[type="radio"]:checked + label::before {
-    background-color: #333;
-}
-
-.radio-container label::after {
-    content: '';
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%) scale(0);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #fff;
-    transition: transform 0.2s ease;
-}
-
-.radio-container input[type="radio"]:checked + label::after {
-    transform: translateY(-50%) scale(1);
-}
-
-/* Tooltip Styles */
 .radio-container .tooltip {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 50%;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px; /* Adjusted padding */
+    color: #000;
+    font-size: 1em; /* Adjusted font size */
+    z-index: 1000;
+    border-radius: 4px;
+    top: 50%; /* Position the tooltip below the item */
+    left: 250%;
     transform: translateX(-50%);
-    padding: 10px;
-    background: #333;
-    color: #fff;
-    border-radius: 5px;
-    z-index: 10;
     white-space: nowrap;
+    margin-top: 20px; /* Space between the item and the tooltip */
 }
 
 .radio-container label:hover .tooltip {
     display: block;
 }
 
-.tooltip img {
-    max-width: 200px;
-    max-height: 200px;
+/* Responsive design adjustments */
+@media (max-width: 720px) {
+    .radio-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    input[type="submit"]{
+        width:auto;
+    }
 }
 
-/* Centering Marquee */
-.marquee-container {
-    text-align: center;
+/* Art display styling */
+#art-display {
+    background-color: rgb(208, 230, 158);
+    padding: 15px; /* Adjusted padding */
+    border: 1px solid #ddd;
+    min-height: 200px;
+    white-space: pre-wrap; /* Preserve whitespace formatting */
+    overflow-x: auto; /* Horizontal scrollbar if needed */
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 1.1em; /* Increased font size */
+    line-height: 0.001em; /* Adjust line height */
 }
 
-marquee {
-    font-size: 30px;
+.inputtext {
+    margin-top: 10px;
 }
 
-/* Navigation Bar Styles */
-.navbar {
-    display: flex;
-    justify-content: center;
-    background-color: #121614;
-    padding: 10px 0;
-    position: relative;
+/* Dark mode styling */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
-.nav-button {
-    text-decoration: none;
-    color: white;
-    padding: 10px 20px;
-    margin: 0 10px;
-    border-radius: 5px;
-    background: linear-gradient(145deg, #3805c5, #111);
-    box-shadow: 2px 2px 5px #a1adf0;
-    transition: background 0.3s, box-shadow 0.3s;
-    position: relative;
+body.dark-mode .navbar {
+    background-color: #1e1e1e;
 }
 
-.nav-button:hover {
-    background: linear-gradient(145deg, #555, #222);
-    box-shadow: 3px 3px 10px #000;
-}
-
-/* Active Link Styles */
-.nav-button.active {
-    background: linear-gradient(145deg, #111, #555);
-    box-shadow: 3px 3px 10px #000;
-}
-
-/* Tooltip for Navbar */
-.nav-button .tooltip {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px;
-    background: #333;
-    color: #fff;
-    border-radius: 5px;
-    z-index: 10;
-    white-space: nowrap;
-}
-
-.nav-button:hover .tooltip {
-    display: block;
+body.dark-mode #art-display {
+    background-color: #000;
+    color: #e0e0e0;
 }

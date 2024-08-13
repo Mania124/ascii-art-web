@@ -34,7 +34,7 @@ func main() {
 		fmt.Println("usage: go run .")
 		return
 	}
-	
+
 	// Define HTTP handlers
 	http.HandleFunc("/", handlers.Index)
 	http.HandleFunc("/ascii-art", handlers.HandleASCIIArt)
@@ -42,7 +42,7 @@ func main() {
 	// Serve static files
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
-	
+
 	// Defining server protocol and http port
 	url := "http://localhost:8080"
 	log.Println("Server is running on", url)

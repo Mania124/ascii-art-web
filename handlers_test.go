@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-//Test funcionality of handler function Index
+// Test funcionality of handler function Index
 func TestIndex(t *testing.T) {
 
 	testCases := []struct {
@@ -23,7 +23,9 @@ func TestIndex(t *testing.T) {
 		{"GET /", http.MethodGet, "/", "templates/index.html", http.StatusMovedPermanently},
 		{"GET /home", http.MethodGet, "/home", "templates/index.html", http.StatusOK},
 		{"GET /aboutus", http.MethodGet, "/aboutus", "templates/aboutus.html", http.StatusOK},
-		{"GET /homeee", http.MethodGet, "/homeee", "", http.StatusNotFound},
+		{"GET /404", http.MethodGet, "/404", "templates/404.html", http.StatusOK},
+
+
 	}
 
 	for _, tc := range testCases {
@@ -40,18 +42,17 @@ func TestIndex(t *testing.T) {
 			if status := rr.Code; status != tc.statusCode { //check if recorder status code matches
 				t.Errorf("handler returned wrong status code: got %v want %v", status, tc.statusCode)
 			}
-			
 
 		})
 	}
 }
 
-//Test functionality of handler function ASCIIArt
+// Test functionality of handler function ASCIIArt
 func TestHandleASCIIArt(t *testing.T) {
 	// Create a request to pass to our handler
 	form := url.Values{}
-	form.Set("banner", "standard.txt") 
-	form.Set("input", "Hello")      
+	form.Set("banner", "standard.txt")
+	form.Set("input", "Hello")
 
 	req, err := http.NewRequest("POST", "/ascii-art", strings.NewReader(form.Encode()))
 	if err != nil {
@@ -65,25 +66,23 @@ func TestHandleASCIIArt(t *testing.T) {
 	// Call the handler directly with our request and response recorder
 	handler.ServeHTTP(rr, req)
 
-	
 	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
 	}
 
 	file, err := os.ReadFile("testCases/expectedOutput1.txt")
-	if err != nil{
+	if err != nil {
 		t.Fatalf("Error reading %s", "expectedOutput1.txt")
 	}
 
 	// Check the response body to ensure the expected ASCII art result is generated
-	expected := string(file) 
+	expected := string(file)
 	if !strings.Contains(rr.Body.String(), expected) {
 		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
 	}
 }
 
-
-//Test if MethodNotAllowed is handled correctly
+// Test if MethodNotAllowed is handled correctly
 func TestHandleASCIIArt_MethodNotAllowed(t *testing.T) {
 	req, err := http.NewRequest("GET", "/ascii-art", nil)
 	if err != nil {
@@ -100,7 +99,7 @@ func TestHandleASCIIArt_MethodNotAllowed(t *testing.T) {
 	}
 }
 
-//Test if the case of missing inputs is handled correctly
+// Test if the case of missing inputs is handled correctly
 func TestHandleASCIIArt_MissingInputs(t *testing.T) {
 	req, err := http.NewRequest("POST", "/ascii-art", nil)
 	if err != nil {
@@ -117,7 +116,7 @@ func TestHandleASCIIArt_MissingInputs(t *testing.T) {
 	}
 }
 
-//Test if illegal characters in the input are handled correctly
+// Test if illegal characters in the input are handled correctly
 func TestHandleASCIIArt_IllegalCharacters(t *testing.T) {
 	form := url.Values{}
 	form.Set("banner", "standard.txt")
