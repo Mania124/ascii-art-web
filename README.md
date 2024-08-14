@@ -9,7 +9,7 @@ This is a dockerized web-based application developed using Go, HTML, CSS , and J
    ```bash
    $ git clone https://learn.zone01kisumu.ke/git/hshikuku/ascii-art-web-dockerize.git
    ```
-2. **Install Docker and Go**: Ensure you have Go installed on your machine.(Go to official Go website and follow the instructions (based on your OS)). Also, install docker on your machine if it is not available.
+2. **Install Docker**: Ensure you have docker installed on your machine.(Go to official Docker website and follow the instructions (based on your OS)).
 
 3. **Run Program**: To get the app running, navigate to the directory where you've cloned the repo then use the following command:
     ```bash
