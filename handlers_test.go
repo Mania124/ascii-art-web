@@ -24,8 +24,6 @@ func TestIndex(t *testing.T) {
 		{"GET /home", http.MethodGet, "/home", "templates/index.html", http.StatusOK},
 		{"GET /aboutus", http.MethodGet, "/aboutus", "templates/aboutus.html", http.StatusOK},
 		{"GET /404", http.MethodGet, "/404", "templates/404.html", http.StatusOK},
-
-
 	}
 
 	for _, tc := range testCases {
