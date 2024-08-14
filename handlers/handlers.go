@@ -52,11 +52,24 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			serveTemplate(w, "templates/500.html")
 			return
 		}
+	case "/405", "/405.html":
+		serveTemplate(w, "templates/405.html")
+		return
 
 	default:
 		if r.Method == http.MethodGet {
-			tmpl := template.Must(template.ParseFiles("templates/404.html"))
-			tmpl.Execute(w, "404: Page not Found!")
+			tmpl, err := template.ParseFiles("templates/404.html")
+			if err != nil {
+				http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+				log.Println("500 Internal Server Error")
+				return
+			}
+			errr := tmpl.Execute(w, "404: Page not Found!")
+			if errr != nil {
+				http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+				log.Println("500 Internal Server Error")
+				return
+			}
 
 		}
 	}
