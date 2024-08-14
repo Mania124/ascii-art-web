@@ -1,0 +1,15 @@
+go.mod
+
+.git
+
+README.md
+
+Licence
+
+bash.sh
+
+testCases
+
+*_test.go
+
+Dockerfile
