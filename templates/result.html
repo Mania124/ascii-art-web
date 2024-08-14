@@ -6,8 +6,6 @@
     <style>
         body {
             text-align: center;
-           /* background-color: black;*/
-            /*text-decoration-color: rgb(255, 255, 255);*/
         }
         textarea{
             background-color: var(--background-color);
@@ -22,11 +20,22 @@
             min-height: 200px;
             font-size: 0.5em;
         }
+        /* New CSS for the reset link */
+        a {
+            color: blue;
+            
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: darkblue;
+        }
     </style>
     <title>Document</title>
 </head>
 <body>
-    <p><a href="/home">Reset</a></p>
+    <p><a href="/home" color=" blue">Reset</a></p>
     <textarea rows="20" cols="5" class="out" id="ou" readonly>{{.}}</textarea>
 </body>
 </html>

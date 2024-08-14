@@ -4,13 +4,24 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    background-color: rgb(106, 143, 72);;
+    background: #f5f2f2;
     flex-direction: column;
     min-height: 100vh;
 }
 
+body {
+    font-family: 'Arimo', sans-serif;
+    color: #434446;
+}
+
+/* Example for headings and other text elements */
+h1, p, button {
+    font-family: 'Arimo', sans-serif;
+    color: #2566DA;
+}
+
 .navbar {
-    background-color: #333;
+    background-color: #b4adad;
     color: #fff;
     padding: 15px; /* Adjusted padding */
     display: flex;
@@ -20,7 +31,7 @@ body {
 }
 
 .navbar a, .navbar button {
-    color: #fff;
+    color: #fafafa;
     text-decoration: none;
     padding: 12px;
     font-size: 20px; /* Increased font size */
@@ -42,7 +53,8 @@ body {
 
 .nav-button.active {
     font-weight: bold;
-    background-color: #555;
+    background-color: #2566DA;
+    color: #fafafa;
 }
 
 .tooltip {
@@ -61,6 +73,12 @@ body {
     white-space: nowrap;
     margin-top: 5px; /* Space between the item and the tooltip */
 }
+/* Add this to your CSS file (style.css) */
+.tooltip img {
+    max-width: 200px; /* Adjust the maximum width as needed */
+    height: auto;     /* Maintain aspect ratio */
+}
+
 
 .nav-button:hover .tooltip, #mode-toggle:hover .tooltip {
     display: block;
@@ -86,12 +104,13 @@ body {
 .column {
     width: 100%;
     min-height: 50px;
+    margin-top: 5px;
 }
 
 #art-display {
-    border: 1px solid #ddd;
+    border: 1px solid #b4adad;
     padding: 15px; /* Adjusted padding */
-    background-color: #f4f4f4;
+    /* background-color: #72E1A7; */
     min-height: 200px;
 }
 
@@ -201,7 +220,7 @@ textarea.out {
 input[type="submit"] {
     width: 30%;
     padding: 12px; /* Adjusted padding */
-    background-color: #333;
+    background-color: #2566DA;
     color: #fff;
     border: none;
     border-radius: 50px;
@@ -253,6 +272,38 @@ input[type="submit"]:hover {
     display: block;
 }
 
+/* Responsive adjustments for tooltips */
+@media (min-width: 720px) {
+    .radio-container .tooltip {
+        top: 50%;
+        left: 110%; /* Adjust position to the right of the radio button */
+        transform: translateX(10px); /* Offset to avoid overlapping */
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 720px) {
+    .radio-container .tooltip {
+        top: 100%; /* Position below the radio button */
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 200px; /* Limit width for small screens */
+        font-size: 0.9em; /* Slightly smaller text for better fit */
+    }
+}
+
+@media (max-width: 480px) {
+    .radio-container .tooltip {
+        top: 100%; /* Keep below the radio button */
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 150px; /* Further limit width for very small screens */
+        font-size: 0.8em; /* Even smaller text for very small screens */
+        padding: 6px; /* Adjust padding */
+    }
+}
+
+
 /* Responsive design adjustments */
 @media (max-width: 720px) {
     .radio-container {
@@ -266,7 +317,7 @@ input[type="submit"]:hover {
 
 /* Art display styling */
 #art-display {
-    background-color: rgb(208, 230, 158);
+    /* background-color: hsl(60, 70%, 74%); */
     padding: 15px; /* Adjusted padding */
     border: 1px solid #ddd;
     min-height: 200px;
@@ -295,4 +346,16 @@ body.dark-mode .navbar {
 body.dark-mode #art-display {
     background-color: #000;
     color: #e0e0e0;
+}
+.mode-icon{
+    position: relative;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 40px;
+    color: #fafafa;
+}
+
+a:hover {
+    background-color: darkblue;
 }

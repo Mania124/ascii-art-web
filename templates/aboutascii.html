@@ -8,38 +8,29 @@
 
     <script src="/static/js/jquery-3.6.0.min.js"></script>
     <style>
-        body {
+       body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            background-color: rgb(106, 143, 72);
+            background: #f5f2f2;
             background-size: cover;
             background-position: center;
             color: #333;
-            margin: 0;
-            padding: 0;
         }
 
         .container {
+            background-color: #b4adad;
+            background-size: cover;
             max-width: 1500px;
-            margin: 0 auto;
+            margin: 40px auto; /* Centers the container horizontally */
             padding: 20px;
-            background: rgba(82, 80, 80, 0.404);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: left; /* Align text to the left */
-            
-        }
+}
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
 
-        p {
-            text-decoration: solid;
-            text-align: left;
-            margin-bottom: 1em;
-            text-indent: 2em; /* Indent paragraphs for better readability */
-        }
+        h1, button {
+             font-family: 'Arimo', sans-serif;
+             color: #2566DA;
+}
 
         p:first-of-type::first-letter {
             font-size: 3em; /* Size of the drop cap */
@@ -51,12 +42,14 @@
         }
 
         .navbar {
-            display: flex;
-            background-color: #333;
-            padding: 10px 0;
-            position: relative;
-        }
-
+             background-color: #b4adad;
+             color: #fff;
+             padding: 15px; /* Adjusted padding */
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             position: relative;
+}
         .nav-button {
             text-decoration: none;
             color: white;
@@ -68,15 +61,15 @@
         }
 
         .nav-button:hover {
-            background: linear-gradient(145deg, #555, #222);
-            box-shadow: 3px 3px 10px #000;
+              background-color: darkblue;
+              box-shadow: 3px 3px 10px #000;
         }
-
         /* Active Link Styles */
         .nav-button.active {
-            background: linear-gradient(145deg, #111, #555);
-            box-shadow: 3px 3px 10px #000;
-        }
+            font-weight: bold;
+            background-color: #2566DA;
+            color: #fafafa;
+}
 
         /* Tooltip for Navbar */
         .nav-button .tooltip {
@@ -96,23 +89,70 @@
         .nav-button:hover .tooltip {
             display: block;
         }
+
+        /* Responsive Navbar Styles */
+        .navbar-toggler {
+            display: none;
+            background-color: #333;
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .navbar-collapse {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+
+        .navbar-collapse.collapsed {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-toggler {
+                display: block;
+            }
+
+            .navbar-collapse {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .navbar-collapse.show {
+                display: flex;
+            }
+
+            .nav-button {
+                margin: 10px 0;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="navbar">
-        <a href="/home" class="nav-button">Home
-            <div class="tooltip">Go to Home Page</div>
-        </a>
-        <a href="/aboutus" class="nav-button">About Us
-            <div class="tooltip">Learn more about us</div>
-        </a>
-        <a href="/aboutascii" class="nav-button active">About ASCII Art
-            <div class="tooltip">What is ASCII Art?</div>
-        </a>
-      <!--  <a href="/login" class="nav-button">Log In
-            <div class="tooltip">Access your account</div>
-        </a>-->
+        <button class="navbar-toggler">☰</button>
+        <div class="navbar-collapse">
+            <a href="/home" class="nav-button">Home
+                <div class="tooltip">Go to Home Page</div>
+            </a>
+            <a href="/aboutus" class="nav-button">About Us
+                <div class="tooltip">Learn more about us</div>
+            </a>
+            <a href="/aboutascii" class="nav-button active">About ASCII Art
+                <div class="tooltip">What is ASCII Art?</div>
+            </a>
+            <!-- <a href="/login" class="nav-button">Log In
+                <div class="tooltip">Access your account</div>
+            </a> -->
+        </div>
     </div>
 
     <div class="container">
@@ -132,6 +172,11 @@
 
             // Add 'active' class to the current page's nav button
             $('.nav-button[href="' + path + '"]').addClass('active');
+
+            // Toggle the navbar on button click
+            $('.navbar-toggler').click(function() {
+                $('.navbar-collapse').toggleClass('show');
+            });
         });
     </script>
 </body>

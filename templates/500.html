@@ -8,36 +8,29 @@
 
     <script src="/static/js/jquery-3.6.0.min.js"></script>
     <style>
-        body {
+       body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
+            background: #f5f2f2;
             background-size: cover;
             background-position: center;
-            background-color: rgb(106, 143, 72);
             color: #333;
-            margin: 0;
-            padding: 0;
         }
 
         .container {
+            background-color: #b4adad;
+            background-size: cover;
             max-width: 1500px;
-            margin: 0 auto;
+            margin: 10px auto; /* Centers the container horizontally */
             padding: 20px;
-            background: rgba(82, 80, 80, 0.404);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: left; /* Align text to the left */
-        }
+}
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
 
-        p {
-            text-align: left;
-            margin-bottom: 1em;
-            text-indent: 2em; /* Indent paragraphs for better readability */
-        }
+        h1, p, button {
+             font-family: 'Arimo', sans-serif;
+             color: #2566DA;
+}
 
         p:first-of-type::first-letter {
             font-size: 3em; /* Size of the drop cap */
@@ -49,12 +42,14 @@
         }
 
         .navbar {
-            display: flex;
-            justify-content: center;
-            background-color: #121614;
-            padding: 10px 0;
-            position: relative;
-        }
+             background-color: #b4adad;
+             color: #fff;
+             padding: 15px; /* Adjusted padding */
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             position: relative;
+}
 
         .nav-button {
             text-decoration: none;
@@ -69,15 +64,17 @@
         }
 
         .nav-button:hover {
-            background: linear-gradient(145deg, #555, #222);
-            box-shadow: 3px 3px 10px #000;
+              background-color: darkblue;
+              box-shadow: 3px 3px 10px #000;
         }
 
-        /* Active Link Styles */
-        .nav-button.active {
-            background: linear-gradient(145deg, #111, #555);
-            box-shadow: 3px 3px 10px #000;
-        }
+         /* Active Link Styles */
+         .nav-button.active {
+            font-weight: bold;
+            background-color: #2566DA;
+            color: #fafafa;
+}
+
 
         /* Tooltip for Navbar */
         .nav-button .tooltip {
