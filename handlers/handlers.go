@@ -46,7 +46,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			serveTemplate(w, "templates/400.html")
 			return
 		}
-	case "/500", "500.html":
+	case "/500", "/500.html":
 
 		if r.Method == http.MethodGet {
 			serveTemplate(w, "templates/500.html")
