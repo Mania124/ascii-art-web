@@ -1,7 +1,7 @@
 # ASCII-ART-WEB-DOCKERIZE
 
 ## Description
-This is a dockerized web-based application developed using Go, HTML, CSS , and Javascript. The platform takes input text from the user then displays its graphical representation using ASCII art. You can share the docker image and run an instance (container) on various machines independent of the runtime environment. This is because each container has the environment variables, configuration, and files required to run the application.
+This is a web-based application developed using Go, HTML, CSS , and Javascript. A dockerfile is included to guide through building a docker image and running containers based on the same. The platform takes input text from the user then displays its graphical representation using ASCII art. You can share the docker image and run an instance (container) on various machines independent of the runtime environment. This is because each container has the environment variables, configuration, and files required to run the application.
 
 
 ## Usage
