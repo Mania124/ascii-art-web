@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"bytes"
 	"html/template"
 	"log"
 	"net/http"
@@ -9,6 +10,8 @@ import (
 
 	asciiart "ascii-art-web/ascii-art"
 )
+
+var buffer bytes.Buffer
 
 // Index handles requests to "/" and "/Home"
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -60,17 +63,22 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet {
 			tmpl, err := template.ParseFiles("templates/404.html")
 			if err != nil {
-				http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+				http.Error(w, "Oops, Something went wrong", http.StatusInternalServerError)
 				log.Println("500 Internal Server Error")
 				return
 			}
-			errr := tmpl.Execute(w, "404: Page not Found!")
+			errr := tmpl.Execute(&buffer, "404: Page not Found!")
 			if errr != nil {
-				http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+				http.Error(w, "Oops, Something went wrong", http.StatusInternalServerError)
 				log.Println("500 Internal Server Error")
 				return
 			}
-
+			_, er := buffer.WriteTo(w)
+			if er != nil {
+				http.Error(w, "Oops, Something went wrong", http.StatusInternalServerError)
+				log.Println("500 Internal Server Error")
+				return
+			}
 		}
 	}
 }
@@ -115,14 +123,20 @@ func HandleASCIIArt(w http.ResponseWriter, r *http.Request) {
 
 	tmpl, eE := template.ParseFiles("templates/result.html")
 	if eE != nil {
-		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+		http.Error(w, "Oops, Something went wrong", http.StatusInternalServerError)
 		log.Println("500 Internal Server Error")
 		return
 	}
 	ascii := asciiart.Art(input, asciiart.BannerArt(bannerFilePath))
-	e := tmpl.Execute(w, ascii.String())
+	e := tmpl.Execute(&buffer, ascii.String())
 	if e != nil {
-		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+		http.Error(w, "Oops, Something went wrong", http.StatusInternalServerError)
+		log.Println("500 Internal Server Error")
+		return
+	}
+	_, er := buffer.WriteTo(w)
+	if er != nil {
+		http.Error(w, "Oops, Something went wrong", http.StatusInternalServerError)
 		log.Println("500 Internal Server Error")
 		return
 	}
@@ -137,14 +151,20 @@ func serveTemplate(w http.ResponseWriter, filename string) {
 	}
 	tmpl, ee := template.ParseFiles(filename)
 	if ee != nil {
-		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+		http.Error(w, "Oops, Something went wrong", http.StatusInternalServerError)
 		log.Println("500 Internal Server Error")
 		return
 	}
-	errr := tmpl.Execute(w, nil)
+	errr := tmpl.Execute(&buffer, nil)
 	if errr != nil {
 		log.Println("500 Internal Server Error")
-		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+		http.Error(w, "Oops, Something went wrong", http.StatusInternalServerError)
+		return
+	}
+	_, e := buffer.WriteTo(w)
+	if e != nil {
+		log.Println("500 Internal Server Error")
+		http.Error(w, "Oops, Something went wrong", http.StatusInternalServerError)
 		return
 	}
 }
